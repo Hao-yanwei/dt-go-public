@@ -140,3 +140,41 @@ func ScryptPw(password string) string {
 
 	return string(HashPw)
 }
+
+// CheckLogin 后台登录验证
+func CheckLogin(username string, password string) (User, int) {
+	var user User
+	var PasswordErr error
+
+	db.Where("username = ?", username).First(&user)
+
+	PasswordErr = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+
+	if user.ID == 0 {
+		return user, errmsg.ERROR_USER_NOT_EXIST
+	}
+	if PasswordErr != nil {
+		return user, errmsg.ERROR_PASSWORD_WRONG
+	}
+	if user.Role != 1 {
+		return user, errmsg.ERROR_USER_NO_RIGHT
+	}
+	return user, errmsg.SUCCSE
+}
+
+// CheckLoginFront 前台登录
+func CheckLoginFront(username string, password string) (User, int) {
+	var user User
+	var PasswordErr error
+
+	db.Where("username = ?", username).First(&user)
+
+	PasswordErr = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+	if user.ID == 0 {
+		return user, errmsg.ERROR_USER_NOT_EXIST
+	}
+	if PasswordErr != nil {
+		return user, errmsg.ERROR_PASSWORD_WRONG
+	}
+	return user, errmsg.SUCCSE
+}
