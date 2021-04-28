@@ -10,6 +10,8 @@ import (
 func InitRouter() {
 	gin.SetMode(utils.AppMode)
 	r := gin.Default()
+	// 启用自定义中间件logger
+	r.Use(middleware.Log())
 
 	/*
 		后台管理路由接口

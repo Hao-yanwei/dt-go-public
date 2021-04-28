@@ -16,6 +16,10 @@ go get -u gopkg.in/ini.v1            init 依赖
 go get -u github.com/jinzhu/gorm     数据库驱动软件
 go get -u gorm.io/driver/mysql       mysql 操作依赖
 go get -u github.com/dgrijalva/jwt-go  jwt token
+go get -u github.com/sirupsen/logrus  日志处理
+go get -u github.com/lestrrat-go/file-rotatelogs 日志分割
+go get -u github.com/rifflock/lfshook
+
 
 ```
 ### 创建项目
