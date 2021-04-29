@@ -37,4 +37,7 @@ go get -u github.com/qiniu/go-sdk/v7   7牛云上传
 go get -u github.com/gin-contrib/cors  跨域
 
 ```
+#### 项目启动：
+- go run main.go
+
 项目学习链接：https://gitee.com/wejectchan/ginblog/tree/master
