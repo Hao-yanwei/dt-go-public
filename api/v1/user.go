@@ -1,17 +1,13 @@
 package v1
 
 import (
-	//"dt-go-public/model"
-	//"dt-go-public/utils/errmsg"
 	"dt-go-public/model"
 	"dt-go-public/utils/errmsg"
+	"dt-go-public/utils/validator"
 	"github.com/gin-gonic/gin"
 	"strconv"
-
-	//"github.com/go-playground/validator/v10"
+	//validator "github.com/go-playground/validator/v10"
 	"net/http"
-	//"github.com/go-playground/validator/v10"
-	//"net/http"
 )
 
 var code int
@@ -19,21 +15,21 @@ var code int
 // 添加用户
 func AddUser(c *gin.Context) {
 	var data model.User
-	//var msg string
-	//var validCode int
+	var msg string
+	var validCode int
 	_ = c.ShouldBindJSON(&data)
 
-	//msg, validCode = validator.Validate(&data)
-	//if validCode != errmsg.SUCCSE {
-	//	c.JSON(
-	//		http.StatusOK, gin.H{
-	//			"status":  validCode,
-	//			"message": msg,
-	//		},
-	//	)
-	//	c.Abort()
-	//	return
-	//}
+	msg, validCode = validator.Validate(&data)
+	if validCode != errmsg.SUCCSE {
+		c.JSON(
+			http.StatusOK, gin.H{
+				"status":  validCode,
+				"message": msg,
+			},
+		)
+		c.Abort()
+		return
+	}
 
 	code = model.CheckUser(data.Username)
 	if code == errmsg.SUCCSE {

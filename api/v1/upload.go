@@ -1,9 +1,23 @@
 package v1
 
-// 添加用户
+import (
+	"dt-go-public/model"
+	"dt-go-public/utils/errmsg"
+	"github.com/gin-gonic/gin"
+	"net/http"
+)
 
-// 查询用户
+func UpLoad(c *gin.Context) {
+	file, fileHeader, _ := c.Request.FormFile("file")
 
-// 修改用户
+	fileSize := fileHeader.Size
 
-//删除用户
+	url, code := model.UpLoadFile(file, fileSize)
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":  code,
+		"message": errmsg.GetErrMsg(code),
+		"url":     url,
+	})
+
+}

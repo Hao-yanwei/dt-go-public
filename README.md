@@ -19,6 +19,9 @@ go get -u github.com/dgrijalva/jwt-go  jwt token
 go get -u github.com/sirupsen/logrus  日志处理
 go get -u github.com/lestrrat-go/file-rotatelogs 日志分割
 go get -u github.com/rifflock/lfshook
+go get -u github.com/qiniu/go-sdk/v7   7牛云上传
+go get -u github.com/gin-contrib/cors  跨域
+
 
 
 ```

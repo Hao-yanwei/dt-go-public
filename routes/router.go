@@ -12,7 +12,8 @@ func InitRouter() {
 	r := gin.Default()
 	// 启用自定义中间件logger
 	r.Use(middleware.Log())
-
+	// 启用跨域插件
+	r.Use(middleware.Cors())
 	/*
 		后台管理路由接口
 	*/
@@ -55,6 +56,11 @@ func InitRouter() {
 		// 登录控制模块
 		router.POST("login", v1.Login)
 		router.POST("loginfront", v1.LoginFront)
+
+		// 上传文件
+		/*
+		auth.POST("upload", v1.UpLoad)
+		*/
 
 		//// 获取个人设置信息
 		//router.GET("profile/:id", v1.GetProfile)
